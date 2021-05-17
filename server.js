@@ -11,10 +11,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/public/')));
 
 const config = {
-    user: 'todolist',
-    password: 'Qwerty12',
-    server: 'activities-server.database.windows.net',
-    database: 'activities',
+    user:             // User of database
+    password:         // Password of database
+    server:           // Server 
+    database:         // Database name
     options: {
         encrypt: true
     }
@@ -50,7 +50,7 @@ app.route('/deleteTask/:id').get((req, res) => {
     (async function deleteActivity() {
         var { id } = req.params;
         const request = new sql.Request();
-        await request.query("DELETE FROM activity WHERE id = " + id, (error) => {
+        request.query("DELETE FROM activity WHERE id = " + id, (error) => {
             if (error) {
                 console.log("error: ", error);
             }
