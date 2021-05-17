@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="/css/ToDoList.css">
+</head>
+<body>
+<div class="page">
+    <span class="head">
+        <h1>TO-DO List</h1>
+    </span>
+    <form action="/addTask" method="POST">
+    <div class="allItems">
+        <div id = "inputItems">
+            <div class ="status">
+                <h4>Task status</h4>
+                <input id="userInputStatus" name = "status" type="text" placeholder="Add work status..." required>
+            </div>
+            <div class ="task">
+                <h4>Task name</h4>
+                <input id="userInput" name = "description" type="text" placeholder="Add new task..." required>
+            </div>
+            <div class ="dd">
+                <h4>Task date</h4>
+                <input id="userInputDate" name = "date" type="text" placeholder="DD.MM.YYYY" required>
+            </div>
+        </div>
+        <button id="txt-btn" name = "enterButton"> Enter </button>
+    </div>
+    </form>
+    <div class="list">
+            <% for(var i = 0; i <activity.length; i++){%>
+                <ul class="items" data-id="<%= activity[i].id %>"> 
+                    <li class = "li"> 
+                        <span class="activityDescription" data-id = "<%= activity[i].id %>">
+                            <span class = "text" data-id = "<%= activity[i].id %>"><%= activity[i].description%></span>
+                            <a href='/deleteTask/<%= activity[i].id %>' id="delBtn"> X </a>
+                        </span> 
+                    </li>
+                    <span class="activityDate" data-id = "<%= activity[i].id %>">
+                        <%= activity[i].date%>
+                    </span>
+                    <span class="activityStatus">
+                        <span id = "activityStatusOfWork" ><%= activity[i].statusOfWork %> </span>
+                        <button class = "pencilButton" data-id = "<%= activity[i].id %>">&#9998;</button>
+                    </span>
+                </ul>
+            <%} %>
+            <section hidden class="update-status" >
+                <input id="editStatus" name = "newStatus" type="text" placeholder="Edit work status"> 
+                <button id="editButton" action = "/updateTask" method = "PATCH"> Edit </button>
+            </section>
+    </div>
+</div>
+
+<script src = "/js/ToDoList.js"></script>
+</body>
+</html>
